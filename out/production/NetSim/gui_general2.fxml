@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Группа: БВТ1703.
+  ~ Студент: Тимчук А.В.
+  ~ Создано: 11.3.2019.
+  ~ Copyright (c) 2019.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Canvas id="canvas" height="337.0" layoutX="14.0" layoutY="31.0" width="385.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="201.0" AnchorPane.topAnchor="31.0" />
+        <Label id="net_param_label" layoutX="14.0" layoutY="14.0" text="Сеть: ?х?" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+        <Label layoutX="417.0" layoutY="14.0" text="Количество узлов (X или X*Y):" AnchorPane.rightAnchor="34.0" />
+        <TextField id="count" layoutX="417.0" layoutY="39.0" AnchorPane.rightAnchor="34.0" />
+        <Button id="draw" layoutX="417.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Рассчитать" AnchorPane.rightAnchor="34.0" />
+        <Separator id="sep_gor" layoutX="83.0" layoutY="367.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label id="state" layoutX="10.0" layoutY="378.0" text="Состояние:" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" />
+      <Separator id="sep_vert" layoutX="396.0" layoutY="64.0" orientation="VERTICAL" prefHeight="368.0" prefWidth="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="0.0" />
+      <Slider id="var_b" blockIncrement="1.0" focusTraversable="false" layoutX="417.0" layoutY="157.0" AnchorPane.rightAnchor="43.0" />
+      <Label layoutX="417.0" layoutY="134.0" text="Вероятность заражения:" AnchorPane.rightAnchor="48.0" />
+      <Label id="var_b_label" layoutX="557.0" layoutY="156.0" text="0" AnchorPane.rightAnchor="36.0" />
+      <Label id="var_g_label" layoutX="558.0" layoutY="206.0" text="0" AnchorPane.rightAnchor="36.0" />
+      <Label layoutX="418.0" layoutY="184.0" text="Вероятность выздоровления:" AnchorPane.rightAnchor="20.0" />
+      <Slider id="var_g" blockIncrement="1.0" focusTraversable="false" layoutX="418.0" layoutY="207.0" AnchorPane.rightAnchor="42.0" />
+      <Label id="var_r_label" layoutX="558.0" layoutY="255.0" text="0" AnchorPane.rightAnchor="36.0" />
+      <Label layoutX="418.0" layoutY="233.0" text="Вероятность ослабления:" AnchorPane.rightAnchor="43.0" />
+      <Slider id="var_r" blockIncrement="1.0" focusTraversable="false" layoutX="418.0" layoutY="256.0" AnchorPane.rightAnchor="42.0" />
+      <Button id="btn_start" layoutX="417.0" layoutY="281.0" mnemonicParsing="false" text="Запуск" AnchorPane.rightAnchor="130.0" />
+      <Label id="tick_time" layoutX="476.0" layoutY="378.0" text="Шаг:" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="99.0" />
+      <Slider id="var_delay" blockIncrement="1.0" focusTraversable="false" layoutX="415.0" layoutY="351.0" max="1000.0" min="100.0" AnchorPane.rightAnchor="45.0" />
+      <Label id="var_delay_label" layoutX="555.0" layoutY="350.0" text="0" AnchorPane.rightAnchor="38.0" />
+      <Label layoutX="418.0" layoutY="333.0" text="Задержка шага:" AnchorPane.rightAnchor="96.0" />
+      <Button id="btn_graph" layoutX="485.0" layoutY="281.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="График" AnchorPane.rightAnchor="45.0" />
+      <CheckBox id="use_torus" layoutX="417.0" layoutY="68.0" mnemonicParsing="false" text="Замкнуть в тор" AnchorPane.rightAnchor="79.0" />
+    </children>
+</AnchorPane>
