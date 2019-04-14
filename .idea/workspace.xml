@@ -2,29 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e1a091e3-47c0-499f-93e8-f1e552988529" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/RealMetamorph.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/Student.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/andrt.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NetSim.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/FXCreator$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/FXCreator$Node.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/FXCreator.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/Main$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/Main$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/gui_general.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/gui_general2.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/NetSim/replay_pid7936.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FXCreator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui_general.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui_general2.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/replay_pid7936.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/xmlparser/Document.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/xmlparser/Node.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/xmlparser/XMLParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -54,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FXCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="508" column="56" selection-start-line="508" selection-start-column="56" selection-end-line="508" selection-end-column="56" />
+            <state relative-caret-position="272">
+              <caret line="510" column="5" lean-forward="true" selection-start-line="510" selection-start-column="5" selection-end-line="510" selection-end-column="5" />
               <folding>
                 <element signature="e#19920#19921#0" expanded="true" />
                 <element signature="e#19966#19967#0" expanded="true" />
@@ -125,6 +106,12 @@
               <item name="NetSim" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="NetSim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NetSim" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="xmlparser" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -137,6 +124,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552646163474" />
+    <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -286,15 +274,24 @@
       <workItem from="1554048977192" duration="3799000" />
       <workItem from="1554112753900" duration="4389000" />
       <workItem from="1554134815483" duration="34000" />
-      <workItem from="1555270391477" duration="547000" />
+      <workItem from="1555270391477" duration="1604000" />
     </task>
+    <task id="LOCAL-00001" summary="Enable VCS Git">
+      <created>1555271010913</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1555271010913</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65036000" />
+    <option name="totallyTimeSpent" value="66093000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26928896" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -330,6 +327,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Enable VCS Git" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enable VCS Git" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -400,8 +401,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FXCreator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="508" column="56" selection-start-line="508" selection-start-column="56" selection-end-line="508" selection-end-column="56" />
+        <state relative-caret-position="272">
+          <caret line="510" column="5" lean-forward="true" selection-start-line="510" selection-start-column="5" selection-end-line="510" selection-end-column="5" />
           <folding>
             <element signature="e#19920#19921#0" expanded="true" />
             <element signature="e#19966#19967#0" expanded="true" />
