@@ -1,4 +1,5 @@
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -13,6 +14,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
+import xmlparser.Document;
+import xmlparser.XMLParser;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -43,6 +46,8 @@ class FXCreator {
     private Button drawButton;
     private Button startButton;
     private Button graphButton;
+    private Button loadButton;
+    private Button saveButton;
     private CheckBox torus;
 
     //Logic
@@ -53,7 +58,7 @@ class FXCreator {
     private double offset;
     private double stepI;
     private double stepJ;
-    private int nodes;
+    private static int nodes;
     private static int nodes_S;
     private static int nodes_I;
     private static int nodes_R;
@@ -71,6 +76,7 @@ class FXCreator {
     private boolean choosePath;
     private Point2D startPoint;
     private MouseButton pressed;
+    private Document document;
 
 
     FXCreator(Main main) {
@@ -97,6 +103,8 @@ class FXCreator {
             delaySlider = (Slider) parent.lookup("#var_delay");
             startButton = (Button) parent.lookup("#btn_start");
             graphButton = (Button) parent.lookup("#btn_graph");
+            loadButton = (Button) parent.lookup("#btn_load");
+            saveButton = (Button) parent.lookup("#btn_save");
             torus = (CheckBox) parent.lookup("#use_torus");
             Separator vert = (Separator) parent.lookup("#sep_vert");
             Separator gor = (Separator) parent.lookup("#sep_gor");
@@ -165,6 +173,8 @@ class FXCreator {
                 rSlider.setDisable(false);
                 delaySlider.setDisable(false);
                 drawButton.setDisable(false);
+                saveButton.setDisable(false);
+                loadButton.setDisable(false);
                 stateLabel.setText(String.format("Состояние: Готово, N = %d, S = %d, I = %d, R = %d.", nodes, nodes_S, nodes_I, nodes_R));
             } else {
                 random = new Random(System.currentTimeMillis());
@@ -181,6 +191,8 @@ class FXCreator {
                 delaySlider.setDisable(true);
                 drawButton.setDisable(true);
                 graphButton.setDisable(false);
+                saveButton.setDisable(true);
+                loadButton.setDisable(true);
             }
         });
         drawButton.setOnAction(event -> {
@@ -225,7 +237,9 @@ class FXCreator {
             stateLabel.setText(String.format("Состояние: Готово, N = %d, S = %d, I = %d, R = %d.", nodes, nodes_S, nodes_I, nodes_R));
             ticksLabel.setText(String.format("Шаг: %d", ticks));
             setTorus(torus.isSelected());
+            saveButton.setDisable(false);
         });
+        saveButton.setDisable(true);
         graphButton.setOnAction(event -> {
             createGraphic();
         });
@@ -324,9 +338,7 @@ class FXCreator {
                     return;
 
                 startPoint = new Point2D(event.getX(), event.getY());
-                if ((iOffset > left && iOffset < right) || (jOffset > left && jOffset < right)) {
-                    choosePath = true;
-                }
+                choosePath = (iOffset > left && iOffset < right) || (jOffset > left && jOffset < right);
             }
         });
         canvas.setOnMouseReleased(event -> {
@@ -359,7 +371,10 @@ class FXCreator {
                     for (int i = i1; i <= i2; i++) {
                         for (int j = j1; j <= j2; j++) {
                             if (i > -1 && j > -1 && i < count && j < count2) {
-                                if (pressed == MouseButton.PRIMARY) {
+                                clear(canvas.getGraphicsContext2D(), net[i][j].x - 5, net[i][j].y - 5, 10, 10);
+                                if (event.isShiftDown()) {
+                                    net[i][j].delNode();
+                                } else if (pressed == MouseButton.PRIMARY) {
                                     net[i][j].nextState();
                                 } else {
                                     net[i][j].prevState();
@@ -370,12 +385,156 @@ class FXCreator {
                     }
                     stateLabel.setText(String.format("Состояние: Готово, N = %d, S = %d, I = %d, R = %d.", nodes, nodes_S, nodes_I, nodes_R));
                 }
+                startPoint = null;
             }
         });
         torus.setOnAction(event -> {
             setTorus(torus.isSelected());
         });
+        saveButton.setOnAction(event -> {
+            document = Document.createDocument();
+            xmlparser.Node root = new xmlparser.Node("net_sim");
+            document.appendChild(root);
+            root.setAttribute("b", "" + (((b + 1) / 2) * 100));
+            root.setAttribute("g", "" + (((g + 1) / 2) * 100));
+            root.setAttribute("r", "" + (((r + 1) / 2) * 100));
+            root.setAttribute("delay", "" + delay);
+            root.setAttribute("torus", "" + torus.isSelected());
+            root.setAttribute("steps", "" + ticks);
+            xmlparser.Node root2 = new xmlparser.Node("net");
+            root2.setAttribute("w", "" + count);
+            root2.setAttribute("h", "" + count2);
+            root.appendChild(root2);
+            xmlparser.Node line;
+            xmlparser.Node node;
+            for (int i = 0; i < count; i++) {
+                line = new xmlparser.Node("line");
+                line.setAttribute("i", "" + i);
+                for (int j = 0; j < count2; j++) {
+                    node = new xmlparser.Node("node");
+                    node.setAttribute("j", "" + j);
+                    node.setAttribute("state", "" + net[i][j].state);
+                    for (Node node1 : net[i][j].nears) {
+                        xmlparser.Node near = new xmlparser.Node("near");
+                        near.setAttribute("i", "" + node1.i);
+                        near.setAttribute("j", "" + node1.j);
+                        node.appendChild(near);
+                    }
+                    line.appendChild(node);
+                }
+                root2.appendChild(line);
+            }
+            root2 = new xmlparser.Node("graph");
+            addSeries(root2, series_S.getData(), "s");
+            addSeries(root2, series_I.getData(), "i");
+            addSeries(root2, series_R.getData(), "r");
+            root.appendChild(root2);
+            try {
+                XMLParser.save("net.save", document);
+            } catch (IOException ignored) {
+            }
+        });
+
+        loadButton.setOnAction(event -> {
+            try {
+                document = XMLParser.parse("net.save");
+                xmlparser.Node root = document.getNodesByTagName("net_sim").get(0);
+                bSlider.setValue(Float.parseFloat(root.getAttribute("b")));
+                gSlider.setValue(Float.parseFloat(root.getAttribute("g")));
+                rSlider.setValue(Float.parseFloat(root.getAttribute("r")));
+                delay = Integer.parseInt(root.getAttribute("delay"));
+                ticks = Integer.parseInt(root.getAttribute("steps"));
+                torus.setSelected(Boolean.parseBoolean(root.getAttribute("torus")));
+                xmlparser.Node root2 = root.getNodesByTagName("net").get(0);
+                count = Integer.parseInt(root2.getAttribute("w"));
+                count2 = Integer.parseInt(root2.getAttribute("h"));
+                GraphicsContext context = canvas.getGraphicsContext2D();
+                double startPos = offset;
+                stepJ = (canvas.getHeight() - 2 * startPos) / (count2 - 1);
+                stepI = (canvas.getWidth() - 2 * startPos) / (count - 1);
+                net = new Node[count][count2];
+                if (count != count2)
+                    countNodesField.setText("" + count + "*" + count2);
+                else
+                    countNodesField.setText("" + count);
+                clear(context, 0, 0, canvas.getWidth(), canvas.getHeight());
+                nodes_S = 0;
+                nodes_I = 0;
+                nodes_R = 0;
+                for (xmlparser.Node line : root2.getNodesByTagName("line")) {
+                    int i = Integer.parseInt(line.getAttribute("i"));
+                    for (xmlparser.Node node : line.getNodesByTagName("node")) {
+                        int j = Integer.parseInt(node.getAttribute("j"));
+                        byte state = Byte.parseByte(node.getAttribute("state"));
+                        net[i][j] = new Node(i * stepI + startPos, j * stepJ + startPos, i, j, state, count - 1, count2 - 1, startPos);
+                        switch (state) {
+                            case Node.S:
+                                nodes_S++;
+                                break;
+                            case Node.I:
+                                nodes_I++;
+                                break;
+                            case Node.R:
+                                nodes_R++;
+                                break;
+                        }
+                    }
+                }
+                nodes = nodes_S + nodes_I + nodes_R;
+                for (xmlparser.Node line : root2.getNodesByTagName("line")) {
+                    int i = Integer.parseInt(line.getAttribute("i"));
+                    for (xmlparser.Node node : line.getNodesByTagName("node")) {
+                        int j = Integer.parseInt(node.getAttribute("j"));
+                        for (xmlparser.Node near : node.getNodesByTagName("near")) {
+                            int i1 = Integer.parseInt(near.getAttribute("i"));
+                            int j1 = Integer.parseInt(near.getAttribute("j"));
+                            net[i][j].addNear(net[i1][j1]);
+                        }
+                        net[i][j].draw(canvas.getGraphicsContext2D());
+                    }
+                }
+                series_S = new XYChart.Series();
+                series_S.setName("Восприимчивые узлы");
+                series_I = new XYChart.Series();
+                series_I.setName("Заражённые узлы");
+                series_R = new XYChart.Series();
+                series_R.setName("Имунные узлы");
+                if (ticks > 0) {
+                    graphButton.setDisable(false);
+                    root2 = root.getNodesByTagName("graph").get(0);
+                    getSeries(root2, series_S.getData(), "s");
+                    getSeries(root2, series_I.getData(), "i");
+                    getSeries(root2, series_R.getData(), "r");
+                    graphButton.setDisable(false);
+                }
+                saveButton.setDisable(false);
+                startButton.setDisable(false);
+                stateLabel.setText(String.format("Состояние: Готово, N = %d, S = %d, I = %d, R = %d.", nodes, nodes_S, nodes_I, nodes_R));
+            } catch (IOException ignored) {
+            }
+        });
         stateLabel.setText("Состояние: Пусто");
+    }
+
+    private void addSeries(xmlparser.Node root2, ObservableList<XYChart.Data> dataset, String tag) {
+        if (dataset.isEmpty())
+            return;
+        xmlparser.Node series = new xmlparser.Node(tag);
+        xmlparser.Node dat;
+        for (XYChart.Data data : dataset) {
+            dat = new xmlparser.Node("data");
+            dat.setAttribute("tick", "" + data.getXValue());
+            dat.setAttribute("count", "" + data.getYValue());
+            series.appendChild(dat);
+        }
+        root2.appendChild(series);
+    }
+
+    private void getSeries(xmlparser.Node root2, ObservableList<XYChart.Data> dataset, String tag) {
+        xmlparser.Node series = root2.getNodesByTagName(tag).get(0);
+        for (xmlparser.Node dat : series.getNodesByTagName("data")) {
+            dataset.add(new XYChart.Data(Integer.parseInt(dat.getAttribute("tick")), Integer.parseInt(dat.getAttribute("count"))));
+        }
     }
 
     private void setTorus(boolean newValue) {
@@ -564,6 +723,7 @@ class FXCreator {
         static final byte S = 0;
         static final byte I = 1;
         static final byte R = 2;
+        static final byte D = 3;
         private double offset;
 
         Node(double x, double y, int i, int j, byte state, int iMax, int jMax, double offset) {
@@ -596,13 +756,19 @@ class FXCreator {
         }
 
         void draw(GraphicsContext context) {
+            if (state == D)
+                return;
             drawLines(context);
             drawNode(context);
         }
 
         private void drawLines(GraphicsContext context) {
+            if (state == D)
+                return;
             context.setStroke(Color.rgb(0, 0, 0));
             for (Node node : nears) {
+                if (node.state == D)
+                    continue;
                 context.beginPath();
                 boolean classic = false;
                 switch (type) {
@@ -739,6 +905,8 @@ class FXCreator {
         }
 
         void calculateNewState(double b, double g, double r, Random random, GraphicsContext context) {
+            if (state == D)
+                return;
             int typeS = 0;
             int typeI = 0;
             int typeR = 0;
@@ -796,6 +964,8 @@ class FXCreator {
         }
 
         private void drawNode(GraphicsContext context) {
+            if (state == D)
+                return;
             context.beginPath();
             switch (state) {
                 case S:
@@ -827,6 +997,8 @@ class FXCreator {
         }
 
         private void changeState(byte state) {
+            if (this.state == D)
+                return;
             switch (this.state) {
                 case S:
                     nodes_S--;
@@ -870,6 +1042,28 @@ class FXCreator {
 
         void prevState() {
             changeState((byte) (getState() - 1));
+        }
+
+        void delNode() {
+            if (this.state == D) {
+                this.state = S;
+                nodes++;
+                nodes_S++;
+            } else {
+                switch (this.state) {
+                    case S:
+                        nodes_S--;
+                        break;
+                    case I:
+                        nodes_I--;
+                        break;
+                    case R:
+                        nodes_R--;
+                        break;
+                }
+                this.state = D;
+                nodes--;
+            }
         }
 
     }
