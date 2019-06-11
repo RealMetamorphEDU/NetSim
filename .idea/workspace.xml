@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e1a091e3-47c0-499f-93e8-f1e552988529" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NetSim/FXCreator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NetSim/FXCreator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NetSim/FXCreator$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NetSim/FXCreator$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NetSim/FXCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NetSim/FXCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/NetSim/gui_general2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/NetSim/gui_general2.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FXCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FXCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui_general2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui_general2.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,20 +32,33 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FXCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="462" column="28" selection-start-line="462" selection-start-column="28" selection-end-line="462" selection-end-column="28" />
+            <state relative-caret-position="325">
+              <caret line="515" column="43" lean-forward="true" selection-start-line="515" selection-start-column="43" selection-end-line="515" selection-end-column="43" />
               <folding>
-                <element signature="e#31803#37500#0" />
-                <element signature="e#31992#37490#1" />
-                <element signature="e#37510#39691#0" />
-                <element signature="e#39701#40332#0" />
-                <element signature="e#40342#40449#0" />
+                <element signature="e#4723#4774#0" />
+                <element signature="e#4821#4984#0" />
+                <element signature="e#5031#5194#0" />
+                <element signature="e#5241#5404#0" />
+                <element signature="e#5455#5601#0" />
+                <element signature="e#5761#7145#0" />
+                <element signature="e#7179#8965#0" />
+                <element signature="e#9037#9086#0" />
+                <element signature="e#9436#13269#0" />
+                <element signature="e#13305#14041#0" />
+                <element signature="e#14078#16150#0" />
+                <element signature="e#16179#16241#0" />
+                <element signature="e#16275#18271#0" />
+                <element signature="e#22672#23205#0" />
+                <element signature="e#23211#23594#0" />
+                <element signature="e#23600#25984#0" />
+                <element signature="e#25990#26228#0" />
+                <element signature="e#26234#27348#0" />
+                <element signature="e#27354#27946#0" />
+                <element signature="e#29235#29254#0" />
+                <element signature="e#41840#41841#0" expanded="true" />
                 <element signature="e#41881#41882#0" expanded="true" />
+                <element signature="e#41908#41909#0" expanded="true" />
                 <element signature="e#41944#41945#0" expanded="true" />
-                <element signature="e#42222#42223#0" expanded="true" />
-                <element signature="e#42282#42283#0" expanded="true" />
-                <element signature="e#42310#42311#0" expanded="true" />
-                <element signature="e#42370#42371#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,7 +67,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/net.save">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11033">
+            <state relative-caret-position="13362">
               <caret line="786" column="32" selection-start-line="786" selection-start-column="32" selection-end-line="786" selection-end-column="32" />
             </state>
           </provider>
@@ -112,6 +120,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -134,8 +144,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -309,6 +317,10 @@
       <workItem from="1557580663268" duration="109000" />
       <workItem from="1557596925959" duration="2742000" />
       <workItem from="1557742204469" duration="3088000" />
+      <workItem from="1558347624245" duration="232000" />
+      <workItem from="1558348059391" duration="253000" />
+      <workItem from="1559075823702" duration="14000" />
+      <workItem from="1560261763819" duration="3088000" />
     </task>
     <task id="LOCAL-00001" summary="Enable VCS Git">
       <created>1555271010913</created>
@@ -324,11 +336,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555272089017</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Complited save/load.">
+      <created>1558347796825</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1558347796827</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77262000" />
+    <option name="totallyTimeSpent" value="80849000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -343,7 +362,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -373,7 +392,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Enable VCS Git" />
     <MESSAGE value="Added XML Parser" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added XML Parser" />
+    <MESSAGE value="Complited save/load." />
+    <option name="LAST_COMMIT_MESSAGE" value="Complited save/load." />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -431,6 +451,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui_general2.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="952">
@@ -443,35 +471,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/net.save">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11033">
+        <state relative-caret-position="13362">
           <caret line="786" column="32" selection-start-line="786" selection-start-column="32" selection-end-line="786" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui_general2.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FXCreator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="462" column="28" selection-start-line="462" selection-start-column="28" selection-end-line="462" selection-end-column="28" />
+        <state relative-caret-position="325">
+          <caret line="515" column="43" lean-forward="true" selection-start-line="515" selection-start-column="43" selection-end-line="515" selection-end-column="43" />
           <folding>
-            <element signature="e#31803#37500#0" />
-            <element signature="e#31992#37490#1" />
-            <element signature="e#37510#39691#0" />
-            <element signature="e#39701#40332#0" />
-            <element signature="e#40342#40449#0" />
+            <element signature="e#4723#4774#0" />
+            <element signature="e#4821#4984#0" />
+            <element signature="e#5031#5194#0" />
+            <element signature="e#5241#5404#0" />
+            <element signature="e#5455#5601#0" />
+            <element signature="e#5761#7145#0" />
+            <element signature="e#7179#8965#0" />
+            <element signature="e#9037#9086#0" />
+            <element signature="e#9436#13269#0" />
+            <element signature="e#13305#14041#0" />
+            <element signature="e#14078#16150#0" />
+            <element signature="e#16179#16241#0" />
+            <element signature="e#16275#18271#0" />
+            <element signature="e#22672#23205#0" />
+            <element signature="e#23211#23594#0" />
+            <element signature="e#23600#25984#0" />
+            <element signature="e#25990#26228#0" />
+            <element signature="e#26234#27348#0" />
+            <element signature="e#27354#27946#0" />
+            <element signature="e#29235#29254#0" />
+            <element signature="e#41840#41841#0" expanded="true" />
             <element signature="e#41881#41882#0" expanded="true" />
+            <element signature="e#41908#41909#0" expanded="true" />
             <element signature="e#41944#41945#0" expanded="true" />
-            <element signature="e#42222#42223#0" expanded="true" />
-            <element signature="e#42282#42283#0" expanded="true" />
-            <element signature="e#42310#42311#0" expanded="true" />
-            <element signature="e#42370#42371#0" expanded="true" />
           </folding>
         </state>
       </provider>

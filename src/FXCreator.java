@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -69,10 +70,12 @@ class FXCreator {
     private int delay;
     private int ticks;
     private LineChart lineChart;
+    private PieChart pieChart;
     private XYChart.Series series_S;
     private XYChart.Series series_I;
     private XYChart.Series series_R;
     private boolean chartDrawing;
+    private boolean chartDrawingPie;
     private boolean choosePath;
     private Point2D startPoint;
     private MouseButton pressed;
@@ -434,7 +437,6 @@ class FXCreator {
             } catch (IOException ignored) {
             }
         });
-
         loadButton.setOnAction(event -> {
             try {
                 document = XMLParser.parse("net.save");
@@ -499,6 +501,7 @@ class FXCreator {
                 series_I.setName("Заражённые узлы");
                 series_R = new XYChart.Series();
                 series_R.setName("Имунные узлы");
+                graphButton.setDisable(true);
                 if (ticks > 0) {
                     graphButton.setDisable(false);
                     root2 = root.getNodesByTagName("graph").get(0);
@@ -665,6 +668,11 @@ class FXCreator {
                 ((NumberAxis) lineChart.getXAxis()).setUpperBound(ticks);
                 ((NumberAxis) lineChart.getXAxis()).setTickUnit((double) ticks / 10);
             }
+            if (chartDrawingPie) {
+                pieChart.getData().get(0).setPieValue(getMiddle(series_I));
+                pieChart.getData().get(1).setPieValue(getMiddle(series_S));
+                pieChart.getData().get(2).setPieValue(getMiddle(series_R));
+            }
             stateLabel.setText(String.format("Состояние: Симуляция, N = %d, S = %d, I = %d, R = %d.", nodes, nodes_S, nodes_I, nodes_R));
         }
     }
@@ -678,7 +686,6 @@ class FXCreator {
     }
 
     private void createGraphic() {
-        JFXPanel panel = new JFXPanel();
         NumberAxis xAxis = new NumberAxis("Шаги", 0, ticks, (double) ticks / 10);
         NumberAxis yAxis = new NumberAxis("Узлы", 0, nodes, (double) nodes / 15);
         lineChart = new LineChart(xAxis, yAxis);
@@ -686,10 +693,20 @@ class FXCreator {
         lineChart.getData().add(series_S);
         lineChart.getData().add(series_R);
         lineChart.setTitle("График количества узлов от времени");
+        PieChart.Data dataI = new PieChart.Data("Заражённые", getMiddle(series_I));
+        PieChart.Data dataS = new PieChart.Data("Восприимчивые", getMiddle(series_S));
+        PieChart.Data dataR = new PieChart.Data("Имунные", getMiddle(series_R));
+        pieChart = new PieChart();
+        pieChart.getData().clear();
+        pieChart.getData().addAll(dataI, dataS, dataR);
+        pieChart.setTitle("График среднего количества узлов за последние десять шагов");
+
+        JFXPanel panel = new JFXPanel();
         Group root = new Group(lineChart);
-        panel.setScene(new Scene(root, 600, 400));
         JDialog dialog = new JDialog(main);
-        dialog.setTitle("График");
+
+        panel.setScene(new Scene(root, 600, 400));
+        dialog.setTitle("График количества от времени");
         dialog.setContentPane(panel);
         dialog.pack();
         dialog.setResizable(false);
@@ -704,6 +721,36 @@ class FXCreator {
             }
         });
         chartDrawing = true;
+
+        panel = new JFXPanel();
+        root = new Group(pieChart);
+        dialog = new JDialog(main);
+        panel.setScene(new Scene(root, 500, 400));
+        dialog.setTitle("График среднего значения");
+        dialog.setContentPane(panel);
+        dialog.pack();
+        dialog.setResizable(false);
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setVisible(true);
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosed(e);
+                chartDrawingPie = false;
+            }
+        });
+        chartDrawingPie = true;
+    }
+
+    private double getMiddle(XYChart.Series series) {
+        double middle = 0;
+        int cnt = 0;
+        for (int i = series.getData().size() - 1, j = Math.max(series.getData().size() - 12, -1); i > j; i--) {
+            middle += (Integer) (((LineChart.Data) series.getData().get(i)).getYValue());
+            cnt++;
+        }
+        return middle / cnt;
     }
 
     private static class Node {
