@@ -512,6 +512,7 @@ class FXCreator {
                 }
                 saveButton.setDisable(false);
                 startButton.setDisable(false);
+                netLabel.setText(String.format("Сеть %dx%d:", count, count2));
                 stateLabel.setText(String.format("Состояние: Готово, N = %d, S = %d, I = %d, R = %d.", nodes, nodes_S, nodes_I, nodes_R));
             } catch (IOException ignored) {
             }
